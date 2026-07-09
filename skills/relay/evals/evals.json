@@ -6,10 +6,10 @@
       "id": 0,
       "name": "plan-a-relay",
       "prompt": "I want to migrate all our REST endpoints to the new validation layer \u2014 there are around 40 of them across src/server/routes. I won't be able to babysit this. Set it up as a relay so an agent can grind through it across sessions and only pull me in when it actually needs me.",
-      "expected_output": "Produces a charter (default .pi-wui/relays/<name>/charter.md) plus an empty/seeded log. The charter has all four required slots present: goal/finish-line, sizing, handover, intervention signal. The agent ASKS the user to make sizing and the intervention signal concrete rather than inventing strict rules. It does NOT prescribe what a 'good' leg size or cadence is. It may dispatch the first leg only after the charter is agreed.",
+      "expected_output": "Produces a charter (default .pi/relays/<name>/charter.md) plus an empty/seeded log. The charter has all four required slots present: goal/finish-line, sizing, handover, intervention signal. The agent ASKS the user to make sizing and the intervention signal concrete rather than inventing strict rules. It does NOT prescribe what a 'good' leg size or cadence is. It may dispatch the first leg only after the charter is agreed.",
       "files": [],
       "assertions": [
-        { "name": "charter-created", "text": "A charter document is created (default under .pi-wui/relays/<name>/ unless the user specified a location).", "type": "script" },
+        { "name": "charter-created", "text": "A charter document is created (default under .pi/relays/<name>/ unless the user specified a location).", "type": "script" },
         { "name": "goal-slot-present", "text": "The charter defines a concrete, achievable finish line / goal.", "type": "judgment" },
         { "name": "sizing-slot-present", "text": "The charter states how much work is one leg (sizing), rather than leaving it undefined.", "type": "judgment" },
         { "name": "handover-slot-present", "text": "The charter states the handover mechanism (what the spawn prompt says and what the next runner reads).", "type": "judgment" },
@@ -21,7 +21,7 @@
     {
       "id": 1,
       "name": "run-one-leg-and-hand-off",
-      "prompt": "You're working under the Relay framework. Read .pi-wui/relays/<sandbox>/charter.md and .pi-wui/relays/<sandbox>/log.md, continue the plan, then dispatch the next agent.",
+      "prompt": "You're working under the Relay framework. Read .pi/relays/<sandbox>/charter.md and .pi/relays/<sandbox>/log.md, continue the plan, then dispatch the next agent.",
       "expected_output": "Loads the relay skill (handoff prompt names the framework). Orients by reading charter+log, re-anchors to the goal, does exactly ONE well-sized leg per the charter's sizing, appends a log entry (what/why/new state/blockers), makes work durable (saves files, commits if the charter calls for it), then calls spawn_session exactly once with a handoff prompt that names Relay and points at the charter+log. Does not do extra legs or spawn more than once.",
       "files": [],
       "assertions": [
@@ -37,7 +37,7 @@
     {
       "id": 2,
       "name": "stop-on-blocker-do-not-spawn",
-      "prompt": "You're working under the Relay framework. Read .pi-wui/relays/<sandbox>/charter.md and .pi-wui/relays/<sandbox>/log.md and continue. (The next leg hits a condition the charter flagged as requiring the human.)",
+      "prompt": "You're working under the Relay framework. Read .pi/relays/<sandbox>/charter.md and .pi/relays/<sandbox>/log.md and continue. (The next leg hits a condition the charter flagged as requiring the human.)",
       "expected_output": "Orients, begins the leg, recognizes the charter's intervention condition has fired. Stops cleanly: logs the blocker clearly, raises the charter's defined intervention signal so the watching human sees it, and does NOT call spawn_session. A clean stop with a clear blocker is the success condition here.",
       "files": [],
       "assertions": [

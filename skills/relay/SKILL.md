@@ -22,7 +22,7 @@ Two consequences follow, and they govern the whole method:
 
 ## The two documents
 
-A relay is carried by two documents. By default they live in `.pi-wui/relays/<name>/` unless the user or the dispatching prompt says otherwise — always follow an explicit location if given. (This path is project-level, not inside `pi-wui/`; it lives alongside `CONTEXT.md`, `dev-docs/`, etc.)
+A relay is carried by two documents. By default they live in `.pi/relays/<name>/` unless the user or the dispatching prompt says otherwise — always follow an explicit location if given. (This path is CWD-relative, at the project root alongside `CONTEXT.md`, `dev-docs/`, etc.)
 
 **Charter** (`charter.md`) — the stable agreement, written when the relay is planned. It must contain, at minimum:
 
@@ -41,12 +41,12 @@ For a small relay it is fine to collapse both into a single file, as long as the
 
 This is the loop you run when you are dispatched into a relay.
 
-1. **Orient.** Read the charter and the log. Understand the goal and the current state. If you are not sure you are in a relay, the prompt or `.pi-wui/relays/` is your clue — and reading this skill means you are. (Look for `charter.md` and `log.md` under `.pi-wui/relays/<name>/` at the project root.)
+1. **Orient.** Read the charter and the log. Understand the goal and the current state. If you are not sure you are in a relay, the prompt or `.pi/relays/` is your clue — and reading this skill means you are. (Look for `charter.md` and `log.md` under `.pi/relays/<name>/` at the project root.)
 2. **Re-anchor to the goal.** Does the goal still make sense given what the log shows and what you now see? If reality has diverged from the charter, that is often an intervention moment — don't quietly redefine the task.
 3. **Run one leg.** Do exactly one well-sized slice, per the charter's sizing. Resist doing "just a bit more" — extra scope bloats context and breaks the containment that makes Relay work.
 4. **Log it.** Append your entry: what you did, why, the new state, and any blocker. Make all work durable (save files, commit if the relay calls for it).
 5. **Decide: hand off, or stop.**
-   - **Hand off** if there is a clear next leg and you are on track. Use `spawn_session` once, with a prompt that names the Relay method and points the next runner at the charter and log (so this skill loads and they can orient). Then you are done. Handoff is deliberately fire-and-forget: `spawn_session` starts an independent session you will not see and cannot steer — do not reach for a tracked subsession to keep an eye on it. Letting go is the point. The next runner is trusted to run their own leg, and the log is the only thread between you; if you feel the need to watch downstream work, that usually means the leg wasn't sized or handed off cleanly, or an intervention signal should have fired.
+   - **Hand off** if there is a clear next leg and you are on track. Use `spawn_session` once, with a prompt that names the Relay method and points the next runner at the charter and log (so this skill loads and they can orient). Then you are done. Handoff is deliberately fire-and-forget: `spawn_session` starts an independent session you will not see and cannot steer — do not reach for a tracked subsession to keep an eye on it. Letting go is the point. The next runner is trusted to run their own leg, and the log is the only thread between you; if you feel the need to watch downstream work, that usually means the leg wasn't sized or handed off cleanly, or an intervention signal should have fired. (The charter and log live at `.pi/relays/<name>/` CWD-relative.)
    - **Stop — do not spawn —** if the goal is reached, or you are blocked, or the charter's intervention signal fires. Leave a clear note in the log (and raise the intervention signal) so the watching human sees exactly what happened and what they need to decide. A stalled relay that stopped cleanly with a clear blocker is a success; a relay that spawned a confused next runner is a failure.
 
 ## Planning a relay
