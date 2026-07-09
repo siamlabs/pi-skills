@@ -1,7 +1,3 @@
-# skills
-
-Distributable agent skills developed alongside pi-wui.
-
 ## relay
 
 Execute a long or complex plan as a chain of independent sessions, each running
